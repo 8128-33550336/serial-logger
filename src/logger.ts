@@ -10,7 +10,11 @@ export default () => {
         'baudRate': 115200
     });
 
-    const parser = new ReadlineParser()
+    const parser = new ReadlineParser();
+    parser.on('data', (chunk) => {
+        const date = new Date();
+        
+    });
 
     serialport.pipe(parser);
     parser.pipe(process.stdout);
