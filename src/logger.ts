@@ -1,9 +1,18 @@
 import fs from "fs";
+import { PassThrough } from "stream";
 import { ReadlineParser, SerialPort } from "serialport";
 import { logfile, sensorPath } from "./envs";
 
 export default () => {
-    const writestream = fs.createWriteStream(logfile, { flags: 'a' });
+    const addTimeTransform = new Transform({
+        transform(chunk, encoding, callback) {
+            const date = new Date();
+            const dateString = date.toLocalString();
+            this.push(dateString + chunk);
+            callback();
+        }
+    });
+    const fileWritestream = fs.createWriteStream(logfile, { flags: 'a' });
 
     const serialport = new SerialPort({
         'path': sensorPath,
@@ -11,12 +20,9 @@ export default () => {
     });
 
     const parser = new ReadlineParser();
-    parser.on('data', (chunk) => {
-        const date = new Date();
-        
-    });
 
     serialport.pipe(parser);
-    parser.pipe(process.stdout);
-    parser.pipe(writestream);
+    parser.pipe(addTimeTransform);
+    addTimeTransform.pipe(process.stdout);
+    addTimeTransform.pipe(fileWritestream);
 }
