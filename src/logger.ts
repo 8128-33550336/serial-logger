@@ -1,5 +1,5 @@
 import fs from "fs";
-import { PassThrough } from "stream";
+import { Transform } from "stream";
 import { ReadlineParser, SerialPort } from "serialport";
 import { logfile, sensorPath } from "./envs";
 
@@ -7,7 +7,7 @@ export default () => {
     const addTimeTransform = new Transform({
         transform(chunk, encoding, callback) {
             const date = new Date();
-            const dateString = date.toLocalString();
+            const dateString = date.toLocaleString();
             this.push(dateString + chunk);
             callback();
         }
