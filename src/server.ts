@@ -10,4 +10,4 @@ app.get('/all.csv', (req, res) => {
     stream.pipe(res);
 });
 
-app.use(express.static('./resource')));
+app.use(express.static('./resource'));
