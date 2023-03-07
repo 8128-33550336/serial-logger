@@ -8,7 +8,7 @@ export default () => {
         transform(chunk, encoding, callback) {
             const date = new Date();
             const dateString = date.toLocaleString();
-            this.push(dateString + chunk);
+            this.push(dateString + ',' + chunk);
             callback();
         }
     });
