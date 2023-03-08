@@ -25,4 +25,5 @@ export default () => {
     parser.pipe(addTimeTransform);
     addTimeTransform.pipe(process.stdout);
     addTimeTransform.pipe(fileWritestream);
+    fileWritestream.write('Time,Temperature,Humidity,CO2');
 }
