@@ -3,6 +3,7 @@ import { Transform } from "stream";
 import { ReadlineParser, SerialPort } from "serialport";
 import { logfile, sensorPath } from "./envs";
 
+fs.existsSync(logfile) || fs.writeFileSync(logfile, 'Time,Temperature,Humidity,CO2\n');
 export default () => {
     const addTimeTransform = new Transform({
         transform(chunk, encoding, callback) {
@@ -25,5 +26,4 @@ export default () => {
     parser.pipe(addTimeTransform);
     addTimeTransform.pipe(process.stdout);
     addTimeTransform.pipe(fileWritestream);
-    fileWritestream.write('Time,Temperature,Humidity,CO2');
-}
+};

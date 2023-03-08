@@ -10,4 +10,10 @@ app.get('/all.csv', (req, res) => {
     stream.pipe(res);
 });
 
+app.get('/all.txt', (req, res) => {
+    const stream = fs.createReadStream(logfile);
+    res.status(200).contentType('text/plain');
+    stream.pipe(res);
+});
+
 app.use(express.static('./resource'));
