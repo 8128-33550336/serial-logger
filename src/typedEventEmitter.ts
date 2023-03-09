@@ -16,6 +16,8 @@ type TypedEventEmitterConstructor = { new <T extends { [P in string]: unknown[] 
 
 export const TypedEventEmitter: TypedEventEmitterConstructor = EventEmitter as TypedEventEmitterConstructor;
 
+export type listenerType<T extends eventTypedEventEmitter<{ [P in string]: unknown[] }>, K extends string> = T extends eventTypedEventEmitter<infer T> ? (...args: T[K]) => void : never;
+
 export function eventEmitterLogger<T extends eventTypedEmitter<{ [P in string]: unknown[] }>>(ee: T, logger: typeof console.log = console.log) {
     const defaultEmit = ee.emit.bind(ee);
 
