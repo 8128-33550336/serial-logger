@@ -2,14 +2,9 @@ import fs from "fs";
 import { Transform } from "stream";
 import { ReadlineParser, SerialPort } from "serialport";
 import { logfile, sensorPath } from "./envs";
-import { TypedEventEmitter } from "./typedEventEmitter";
+import { eventEmitter } from "./eventEmitter";
 
 fs.existsSync(logfile) || fs.writeFileSync(logfile, 'Time,Temperature,Humidity,CO2\n');
-
-export const eventEmitter = new TypedEventEmitter<{
-    data: [temp: number, hum: number, co2: number];
-}>();
-
 export default () => {
     const addTimeTransform = new Transform({
         transform(chunk, encoding, callback) {
