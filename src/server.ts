@@ -49,7 +49,6 @@ app.ws('/', (ws, req) => {
             clearTimeout(pongTimeout);
         }
     });
-
 });
 
 {
