@@ -1,5 +1,5 @@
 {
-  "type": "module"
+  "type": "module",
   "scripts": {
     "start": "ts-node --esm src/main.ts",
     "test": "jest",
