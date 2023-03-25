@@ -20,6 +20,10 @@ export default () => {
         'path': sensorPath,
         'baudRate': 115200
     });
+    
+    serialport.on('error', () => {
+        process.exit(1);
+    });
 
     const parser = new ReadlineParser();
 
