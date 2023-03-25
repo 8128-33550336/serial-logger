@@ -9,6 +9,7 @@ echo $PATH
 
 while true ; do
     npm start
+    echo 'exited'
     sleep 10
     echo 'restart!!'
 done
