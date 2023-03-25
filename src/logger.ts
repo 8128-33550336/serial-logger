@@ -25,6 +25,10 @@ export default () => {
         process.exit(1);
     });
 
+    serialport.on('close', () => {
+        process.exit(1);
+    });
+
     const parser = new ReadlineParser();
 
     serialport.pipe(parser);
