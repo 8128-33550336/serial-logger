@@ -1,6 +1,6 @@
-import { port } from "./envs";
-import logger from "./logger";
-import { app } from "./server";
+import { port } from "./envs.js";
+import logger from "./logger.js";
+import { app } from "./server.js";
 
 logger();
 app.listen(port);

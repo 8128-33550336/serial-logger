@@ -1,8 +1,8 @@
 import fs from "fs";
 import { Transform } from "stream";
 import { ReadlineParser, SerialPort } from "serialport";
-import { logfile, sensorPath } from "./envs";
-import { eventEmitter } from "./eventEmitter";
+import { logfile, sensorPath } from "./envs.js";
+import { eventEmitter } from "./eventEmitter.js";
 
 fs.existsSync(logfile) || fs.writeFileSync(logfile, 'Time,Temperature,Humidity,CO2\n');
 export default () => {

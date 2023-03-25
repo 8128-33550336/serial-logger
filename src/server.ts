@@ -1,9 +1,9 @@
 import fs from "node:fs";
 import express from "express";
 import expressWs from "express-ws";
-import { logfile } from "./envs";
-import { listenerType } from "./typedEventEmitter";
-import { eventEmitter } from "./eventEmitter";
+import { logfile } from "./envs.js";
+import { listenerType } from "./typedEventEmitter.js";
+import { eventEmitter } from "./eventEmitter.js";
 
 
 export const app = expressWs(express()).app;
