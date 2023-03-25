@@ -22,7 +22,7 @@ export default () => {
     });
     
     serialport.on('error', () => {
-        process.exit(0);
+        process.exit(1);
     });
 
     const parser = new ReadlineParser();
