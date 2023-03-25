@@ -23,11 +23,11 @@ void loop() {
             return; 
         }
         Serial.print(scd30.temperature);
-        Serial.println(",");
+        Serial.print(",");
         Serial.print(scd30.relative_humidity);
-        Serial.println(",");
+        Serial.print(",");
         Serial.print(scd30.CO2, 3);
-        Serial.println("");
+        Serial.print("\n");
     } else {
         //Serial.println("No data");
     }
