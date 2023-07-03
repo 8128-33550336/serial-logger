@@ -44,4 +44,9 @@ export default () => {
         }
         eventEmitter.emit('data', temp, hum, co2);
     });
+    return {
+        frc(num: number) {
+            serialport.write(num + '\n');
+        }
+    };
 };
