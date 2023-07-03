@@ -1,6 +1,7 @@
 #include <Adafruit_SCD30.h>
 
 Adafruit_SCD30  scd30;
+String incomingByte;
 
 void setup(void) {
     Serial.begin(115200);
@@ -30,6 +31,14 @@ void loop() {
         Serial.print("\n");
     } else {
         //Serial.println("No data");
+    }
+    if (Serial.available() > 0) {
+        incomingByte = Serial.readStringUntil('¥n');
+        int num = incomingByte.toInt();
+        if (num == 0) {
+            return;
+        }
+        scd30.forceRecalibrationWithReference(num);
     }
 
     delay(100);
