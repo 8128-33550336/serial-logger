@@ -15,7 +15,11 @@ export function replStart() {
         if (command === 'info') {
             console.log(nowInfo());
         } else if (command.startsWith('frc:')) {
-
+            const val = +command.slice(4);
+            if (Number.isNaN(val)) {
+                return;
+            }
+            
         } else {
             console.log(`unknown '${line.trim()}'`);
             break;
