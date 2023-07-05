@@ -18,5 +18,18 @@
             <span>湿度<span id="hum">0</span>%</span><br>
             <span>CO<sub>2</sub>濃度<span id="co2">0</span>ppm</span>
         </p>
+        <script>
+            const tempElement = document.getElementById('temp');
+            const humElement = document.getElementById('hum');
+            const co2Element = document.getElementById('co2');
+
+            setInterval(() => {
+                fetch('/info').then(res => res.json()).then(json => {
+                    tempElement.textContent = json.temp;
+                    humElement.textContent = json.hum;
+                    co2Element.textContent = json.co2;
+                });
+            }, 2 * 1000);
+        </script>
     </body>
 </html>
