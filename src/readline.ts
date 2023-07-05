@@ -1,7 +1,7 @@
 import * as readline from 'node:readline';
 import { nowInfo } from "./nowInfo.js";
 
-export function replStart() {
+export function replStart(frc: (val: number) => void) {
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
@@ -19,7 +19,7 @@ export function replStart() {
             if (Number.isNaN(val)) {
                 return;
             }
-            
+            frc(val);
         } else {
             console.log(`unknown '${line.trim()}'`);
             break;
