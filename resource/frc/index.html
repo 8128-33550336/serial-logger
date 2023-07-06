@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>scd30を用いたCO2計</title>
+    </head>
+    <body>
+        <h1>FRCを実行してCO<sub>2</sub>濃度をキャリブレーション(校正)します。</h1>
+        <p>
+            二分ほど既知の濃度の無人の部屋に置いておきます。<br>
+            その濃度を入力します。
+            <span>CO<sub>2</sub>濃度<input type="number" id="co2" min="400" max="1000">ppm</span><br>
+            <button id="frcButton">FRC!!</button>
+        </p>
+        <script>
+            const frcElement = document.getElementById('frcButton');
+            const co2Element = document.getElementById('co2');
+            frcElement.onclick = () => {
+                const co2 = +co2Element.value;
+                if (Number.isNaN(co2)) {
+                    return;
+                }
+                if (co2 < 400 || co2 > 1000) {
+                    return;
+                }
+                frcElement.disabled = true;
+                frcElement.onclick = null;
+                fetch('/frc', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        co2: co2
+                    }),
+                });
+            };
+        </script>
+    </body>
+</html>

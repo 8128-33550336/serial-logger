@@ -1,9 +1,10 @@
 import fs from "node:fs";
 import express from "express";
 import expressWs from "express-ws";
-import { logfile } from "./envs";
-import { listenerType } from "./typedEventEmitter";
-import { eventEmitter } from "./eventEmitter";
+import { logfile } from "./envs.js";
+import { listenerType } from "./typedEventEmitter.js";
+import { eventEmitter } from "./eventEmitter.js";
+import { nowInfo } from "./nowInfo.js";
 
 
 export const app = expressWs(express()).app;
@@ -51,15 +52,9 @@ app.ws('/', (ws, req) => {
     });
 });
 
-{
-    let val: { temp: number, hum: number, co2: number; } = { temp: 0, hum: 0, co2: 0 };
-    eventEmitter.on('data', (temp, hum, co2) => {
-        val = { temp, hum, co2 };
-    });
-    app.get('/info', (req, res) => {
-        res.json(val);
-    });
-}
-
+app.get('/info', (req, res) => {
+    const val = nowInfo();
+    res.json(val);
+});
 
 app.use(express.static('./resource'));

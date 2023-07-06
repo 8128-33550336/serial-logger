@@ -1,8 +1,8 @@
 import fs from "fs";
 import { Transform } from "stream";
 import { ReadlineParser, SerialPort } from "serialport";
-import { logfile, sensorPath } from "./envs";
-import { eventEmitter } from "./eventEmitter";
+import { logfile, sensorPath } from "./envs.js";
+import { eventEmitter } from "./eventEmitter.js";
 
 fs.existsSync(logfile) || fs.writeFileSync(logfile, 'Time,Temperature,Humidity,CO2\n');
 export default () => {
@@ -10,7 +10,7 @@ export default () => {
         transform(chunk, encoding, callback) {
             const date = new Date();
             const dateString = date.toLocaleString();
-            this.push(dateString + ',' + chunk);
+            this.push(dateString + ',' + chunk + '\n');
             callback();
         }
     });
@@ -20,12 +20,19 @@ export default () => {
         'path': sensorPath,
         'baudRate': 115200
     });
+    
+    serialport.on('error', () => {
+        process.exit(1);
+    });
+
+    serialport.on('close', () => {
+        process.exit(1);
+    });
 
     const parser = new ReadlineParser();
 
     serialport.pipe(parser);
     parser.pipe(addTimeTransform);
-    addTimeTransform.pipe(process.stdout);
     addTimeTransform.pipe(fileWritestream);
 
     parser.on('data', (chunk) => {
@@ -36,4 +43,9 @@ export default () => {
         }
         eventEmitter.emit('data', temp, hum, co2);
     });
+    return {
+        frc(num: number) {
+            serialport.write(num + '\n');
+        }
+    };
 };

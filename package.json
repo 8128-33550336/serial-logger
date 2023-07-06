@@ -1,7 +1,9 @@
 {
+  "type": "module",
   "scripts": {
-    "start": "ts-node src/main.ts",
-    "test": "jest"
+    "start": "ts-node --esm src/main.ts",
+    "test": "jest",
+    "arduino": "cd arduino;arduino-cli compile --fqbn arduino:avr:uno co2;arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno co2"
   },
   "dependencies": {
     "express": "^4.18.2",
