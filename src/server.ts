@@ -6,7 +6,7 @@ import { listenerType } from "./typedEventEmitter.js";
 import { eventEmitter } from "./eventEmitter.js";
 import { nowInfo } from "./nowInfo.js";
 
-export const createServer = () => {
+export const createServer = (frc: (val: number) => void) => {
     const app = expressWs(express()).app;
 
     app.get('/all.csv', (req, res) => {
@@ -72,7 +72,7 @@ export const createServer = () => {
         if (co2 < 400 || co2 > 1000) {
             return;
         }
-
+        frc(co2);
     });
 
     app.use(express.static('./resource'));

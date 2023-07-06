@@ -3,4 +3,4 @@ import logger from "./logger";
 import { createServer } from "./server";
 
 const { frc } = logger();
-createServer().listen(port);
+createServer(frc).listen(port);
