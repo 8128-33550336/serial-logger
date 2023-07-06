@@ -1,10 +1,13 @@
 import request from "supertest";
-import { app } from '../src/server';
+import { createServer } from '../src/server';
 import { Readable } from "node:stream";
 
 
 
 describe('server test', () => {
+    const frcMock = jest.fn();
+    const app = createServer(frcMock);
+
     test('index', (done) => {
         request(app)
             .get('/')
