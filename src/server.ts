@@ -57,4 +57,22 @@ app.get('/info', (req, res) => {
     res.json(val);
 });
 
+app.post('/frc', express.json(), (req, res) => {
+    const json = req.body as unknown;
+    if (typeof json !== 'object' || !json) {
+        return;
+    }
+    if (!('co2' in json) || typeof json.co2 !== 'number') {
+        return;
+    }
+    const co2 = json.co2;
+    if (Number.isNaN(co2)) {
+        return;
+    }
+    if (co2 < 400 || co2 > 1000) {
+        return;
+    }
+    
+});
+
 app.use(express.static('./resource'));
