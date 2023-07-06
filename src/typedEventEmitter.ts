@@ -22,7 +22,7 @@ export function eventEmitterLogger<T extends eventTypedEmitter<{ [P in string]: 
     const defaultEmit = ee.emit.bind(ee);
 
     ee.emit = (type, ...arg) => {
-        logger(`event emitter emited. type: `, JSON.stringify(type), `, data: `, ...arg);
+        logger(`event emitter emitted. type: `, JSON.stringify(type), `, data: `, ...arg);
         defaultEmit(type, ...arg);
     };
     return ee;
