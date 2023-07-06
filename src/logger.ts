@@ -33,6 +33,7 @@ export default () => {
 
     serialport.pipe(parser);
     parser.pipe(addTimeTransform);
+    addTimeTransform.pipe(process.stdout);
     addTimeTransform.pipe(fileWritestream);
 
     parser.on('data', (chunk) => {
