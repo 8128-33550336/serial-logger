@@ -1,10 +1,10 @@
 import fs from "fs";
 import { Transform } from "stream";
 import { ReadlineParser, SerialPort } from "serialport";
-import { logfile, sensorPath } from "./envs.js";
+import { logFile, sensorPath } from "./envs.js";
 import { eventEmitter } from "./eventEmitter.js";
 
-fs.existsSync(logfile) || fs.writeFileSync(logfile, 'Time,Temperature,Humidity,CO2\n');
+fs.existsSync(logFile) || fs.writeFileSync(logFile, 'Time,Temperature,Humidity,CO2\n');
 export default () => {
     const addTimeTransform = new Transform({
         transform(chunk, encoding, callback) {
@@ -14,13 +14,13 @@ export default () => {
             callback();
         }
     });
-    const fileWritestream = fs.createWriteStream(logfile, { flags: 'a' });
+    const fileWritestream = fs.createWriteStream(logFile, { flags: 'a' });
 
     const serialport = new SerialPort({
         'path': sensorPath,
         'baudRate': 115200
     });
-    
+
     serialport.on('error', () => {
         process.exit(1);
     });

@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import express from "express";
 import expressWs from "express-ws";
-import { logfile } from "./envs.js";
+import { logFile } from "./envs.js";
 import { listenerType } from "./typedEventEmitter.js";
 import { eventEmitter } from "./eventEmitter.js";
 import { nowInfo } from "./nowInfo.js";
@@ -10,13 +10,13 @@ import { nowInfo } from "./nowInfo.js";
 export const app = expressWs(express()).app;
 
 app.get('/all.csv', (req, res) => {
-    const stream = fs.createReadStream(logfile);
+    const stream = fs.createReadStream(logFile);
     res.status(200).contentType('text/csv');
     stream.pipe(res);
 });
 
 app.get('/all.txt', (req, res) => {
-    const stream = fs.createReadStream(logfile);
+    const stream = fs.createReadStream(logFile);
     res.status(200).contentType('text/plain');
     stream.pipe(res);
 });
