@@ -23,13 +23,21 @@
             const humElement = document.getElementById('hum');
             const co2Element = document.getElementById('co2');
 
-            setInterval(() => {
-                fetch('/info').then(res => res.json()).then(json => {
+            const websocket = new WebSocket(`ws://${location.host}/`);
+            websocket.addEventListener('message', event => {
+                try {
+                    const message = '' + event.data;
+                    if (message === 'ping') {
+                        websocket.send('pong');
+                        return;
+                    }
+                    const json = JSON.parse(message);
                     tempElement.textContent = json.temp;
                     humElement.textContent = json.hum;
                     co2Element.textContent = json.co2;
-                });
-            }, 2 * 1000);
+                } catch (e) {
+                }
+            });
         </script>
     </body>
 </html>
