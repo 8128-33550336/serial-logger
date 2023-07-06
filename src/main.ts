@@ -1,6 +1,6 @@
 import { port } from "./envs";
 import logger from "./logger";
-import { app } from "./server";
+import { createServer } from "./server";
 
 const { frc } = logger();
-app.listen(port);
+createServer().listen(port);
