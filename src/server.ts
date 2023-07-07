@@ -57,10 +57,9 @@ export const createServer = (frc: (val: number) => void) => {
         res.json(val);
     });
 
-    app.post('/frc', (req, res) => {
+    app.post('/frc', express.json(), (req, res) => {
         try {
-            const json = JSON.parse(req.body) as unknown;
-            console.log('frc post: ', json);
+            const json = (req.body) as unknown;
             if (typeof json !== 'object' || !json) {
                 return;
             }
