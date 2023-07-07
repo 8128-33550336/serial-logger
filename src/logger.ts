@@ -46,6 +46,7 @@ export default () => {
     });
     return {
         frc(num: number) {
+            console.log('do-frc: ', num);
             serialport.write(num + '\n');
         }
     };
