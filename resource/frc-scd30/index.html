@@ -28,6 +28,9 @@
                 frcElement.onclick = null;
                 fetch('/frc', {
                     method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify({
                         co2: co2
                     }),
