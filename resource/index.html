@@ -18,6 +18,18 @@
             <span>湿度<span id="hum">0</span>%</span><br>
             <span>CO<sub>2</sub>濃度<span id="co2">0</span>ppm</span>
         </p>
+
+        <h2>FRCについて</h2>
+        <p>
+            scd30は定期的にキャリブレーション(校正)が必要です。<br>
+            その手順を説明します。<br>
+            Raspberry Pi の電源を切り電源タップごと誰もいない部屋に移動します。<br>
+            電源をつけ二分ほど置いておきます。<br>
+            他のco2濃度計などを用いてその部屋の濃度を測ります。<br>
+            <a href="/frc-scd30">FRC</a>このページからその値を入力し、FRCボタンを押します。<br>
+            このページに戻り確認します。<br>
+            以上でキャリブレーションができます。<br>
+        </p>
         <script>
             const tempElement = document.getElementById('temp');
             const humElement = document.getElementById('hum');
